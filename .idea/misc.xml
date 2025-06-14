@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+<<<<<<< HEAD
+  <component name="Black">
+    <option name="sdkName" value="Python 3.12" />
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 virtualenv at ~/Documents/fé em deus/Compiladores/.venv" project-jdk-type="Python SDK" />
+=======
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.13 (TurtleScriptV2)" project-jdk-type="Python SDK" />
+>>>>>>> f52a3f3 (add  gitignore)
+</project>
