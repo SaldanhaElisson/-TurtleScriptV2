@@ -1,5 +1,4 @@
 import unittest
-
 from src.parser.left_factoring import left_factoring_concise
 
 

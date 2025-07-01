@@ -1,5 +1,4 @@
 import unittest
-
 from src.parser.remove_left_recursion import remove_left_recursion
 
 
