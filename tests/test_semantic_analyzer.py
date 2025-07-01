@@ -2,7 +2,7 @@ from src.semantic_analyzer.syntatic_tree import Program, Command, VariableDeclar
 from src.semantic_analyzer.analyzer import analyze_program
 
 # Exemplo da input 1
-Program(
+AST_Input_1 = Program(
     declarations=[],
     commands=[
         Command("avancar", Literal(150, "inteiro")),
@@ -17,7 +17,7 @@ Program(
 )
 
 # Exemplo da input 2
-Program(
+AST_Input_2 = Program(
     declarations=[VariableDeclaration("inteiro", ["tamanho_lado"])],
     commands=[
         Assignment("tamanho_lado", Literal(200, "inteiro")),
@@ -35,7 +35,7 @@ Program(
 )
 
 # Exemplo da input 3
-Program(
+AST_Input_3 = Program(
     declarations=[
         VariableDeclaration("inteiro", ["lado"]),
         VariableDeclaration("texto", ["cor"]),
