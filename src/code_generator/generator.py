@@ -44,8 +44,6 @@ class CodeGenerator:
             self.add_line(f"{name} = {default_values[decl.var_type]}")
             
     def generate_expression(self, expr):
-        print("Expressão:", expr)
-
         if isinstance(expr, Literal):
             if expr.type_ == "texto":
                 return f'"{expr.value}"'
@@ -71,8 +69,6 @@ class CodeGenerator:
         self.add_line(f"{cmd.var_name} = {expr_code}")
         
     def generate_command_call(self, cmd):
-        print(f"Gerando comando: {cmd.name} com argumentos: {cmd.args}")
-
         args = cmd.args if isinstance(cmd.args, list) else [cmd.args]
 
         args_code = ", ".join(self.generate_expression(arg) for arg in args)
