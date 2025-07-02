@@ -1,7 +1,7 @@
 import re
 
-from errors.error import LexicalError
-from errors.error_messages import ErrorMessages
+from src.errors.error import LexicalError
+from src.errors.error_messages import ErrorMessages
 from .utils.token_class import Operators, Delimiters, Comment
 from .utils.lexer import Lexer
 from .utils.symbol_table import SymbolTable

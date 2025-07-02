@@ -1,11 +1,11 @@
 import sys
 from pprint import pprint
 
-from lexical_analyzer.tokenizer import Tokenizer
-from lexical_analyzer.utils.lexer import Lexer
-from lexical_analyzer.utils.symbol_table import SymbolTable
-from lexical_analyzer.utils.token_factory import TokenTypeFactory
-from lexical_analyzer.utils.token_list import TokenListTable
+from src.lexical_analyzer.tokenizer import Tokenizer
+from src.lexical_analyzer.utils.lexer import Lexer
+from src.lexical_analyzer.utils.symbol_table import SymbolTable
+from src.lexical_analyzer.utils.token_factory import TokenTypeFactory
+from src.lexical_analyzer.utils.token_list import TokenListTable
 
 
 def main(args):

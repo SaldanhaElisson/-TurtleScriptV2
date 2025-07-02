@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d72477f0-37db-41d9-b150-784f5412d6f0" name="Changes" comment="" />
+    <list default="true" id="d72477f0-37db-41d9-b150-784f5412d6f0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Compiladores.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Compiladores.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pytest.ini" beforeDir="false" afterPath="$PROJECT_DIR$/pytest.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/errors/error_messages.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/errors/error_messages.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lexical_analyzer/tokenizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexical_analyzer/tokenizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lexical_analyzer/utils/lexer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexical_analyzer/utils/lexer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_tokenizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_tokenizer.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,29 +24,141 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2zI3LazOPZyi2m5EJaqziQ4vpVB" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/elisson/faculdade/TurtleScriptV2",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.Python tests for test_tokenizer.TestLexicalTokenizer.test_first_symbol_is_number_error_with_analise_line.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_tokenizer.TestLexicalTokenizer.test_float_with_string_separator.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_tokenizer.TestLexicalTokenizer.test_list_token_and_symbols_with_analise_line.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_tokenizer.TestLexicalTokenizer.test_multiple_delimiter_with_string_separator.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_tokenizer.TestLexicalTokenizer.test_number_delimiters_error_with_analise_line.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_tokenizer.TestLexicalTokenizer.test_operators_with_string_separator.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_tokenizer.TestLexicalTokenizer.test_par_with_string_separator.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_tokenizer.TestLexicalTokenizer.test_unknown_symbol_error_with_analise_line.executor&quot;: &quot;Run&quot;,
+    &quot;Python.lexer.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feat-lexical&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/andrade/-TurtleScriptV2&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunManager" selected="Python.main">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Compiladores" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/main.py" />
+      <option name="PARAMETERS" value="tests/inputs/char_invalido.txt" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_tokenizer.TestLexicalTokenizer.test_first_symbol_is_number_error_with_analise_line" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="Compiladores" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_tokenizer.TestLexicalTokenizer.test_first_symbol_is_number_error_with_analise_line&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_tokenizer.TestLexicalTokenizer.test_list_token_and_symbols_with_analise_line" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="Compiladores" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_tokenizer.TestLexicalTokenizer.test_list_token_and_symbols_with_analise_line&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_tokenizer.TestLexicalTokenizer.test_number_delimiters_error_with_analise_line" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="Compiladores" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_tokenizer.TestLexicalTokenizer.test_number_delimiters_error_with_analise_line&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_tokenizer.TestLexicalTokenizer.test_unknown_symbol_error_with_analise_line" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="Compiladores" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_tokenizer.TestLexicalTokenizer.test_unknown_symbol_error_with_analise_line&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.main" />
+      <item itemvalue="Python tests.Python tests for test_tokenizer.TestLexicalTokenizer.test_number_delimiters_error_with_analise_line" />
+      <item itemvalue="Python tests.Python tests for test_tokenizer.TestLexicalTokenizer.test_unknown_symbol_error_with_analise_line" />
+      <item itemvalue="Python tests.Python tests for test_tokenizer.TestLexicalTokenizer.test_first_symbol_is_number_error_with_analise_line" />
+      <item itemvalue="Python tests.Python tests for test_tokenizer.TestLexicalTokenizer.test_list_token_and_symbols_with_analise_line" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python tests.Python tests for test_tokenizer.TestLexicalTokenizer.test_list_token_and_symbols_with_analise_line" />
+        <item itemvalue="Python tests.Python tests for test_tokenizer.TestLexicalTokenizer.test_first_symbol_is_number_error_with_analise_line" />
+        <item itemvalue="Python tests.Python tests for test_tokenizer.TestLexicalTokenizer.test_unknown_symbol_error_with_analise_line" />
+        <item itemvalue="Python tests.Python tests for test_tokenizer.TestLexicalTokenizer.test_number_delimiters_error_with_analise_line" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -57,5 +180,36 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/main.py</url>
+          <line>11</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tests/test_tokenizer.py</url>
+          <line>210</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/lexical_analyzer/utils/lexer.py</url>
+          <line>29</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/main.py</url>
+          <line>19</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tests/test_tokenizer.py</url>
+          <line>200</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
