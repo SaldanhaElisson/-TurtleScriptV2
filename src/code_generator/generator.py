@@ -30,7 +30,7 @@ class CodeGenerator:
         imports_code = "\n".join(sorted(self.imports)) + "\n\n"
         main_code = "\n".join(self.code)
         
-        return imports_code + main_code
+        return imports_code + main_code + "\n\nturtle.done()"
         
     def generate_declaration(self, decl):
         default_values = {
