@@ -144,10 +144,10 @@
     </configuration>
     <list>
       <item itemvalue="Python.main" />
-      <item itemvalue="Python tests.Python tests for test_tokenizer.TestLexicalTokenizer.test_number_delimiters_error_with_analise_line" />
-      <item itemvalue="Python tests.Python tests for test_tokenizer.TestLexicalTokenizer.test_unknown_symbol_error_with_analise_line" />
       <item itemvalue="Python tests.Python tests for test_tokenizer.TestLexicalTokenizer.test_first_symbol_is_number_error_with_analise_line" />
       <item itemvalue="Python tests.Python tests for test_tokenizer.TestLexicalTokenizer.test_list_token_and_symbols_with_analise_line" />
+      <item itemvalue="Python tests.Python tests for test_tokenizer.TestLexicalTokenizer.test_number_delimiters_error_with_analise_line" />
+      <item itemvalue="Python tests.Python tests for test_tokenizer.TestLexicalTokenizer.test_unknown_symbol_error_with_analise_line" />
     </list>
     <recent_temporary>
       <list>
