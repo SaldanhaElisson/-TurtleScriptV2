@@ -1,4 +1,4 @@
-from src.semantic_analyzer.syntatic_tree import RepeatLoop, Command, Program, VariableDeclaration, Assignment, BinaryExpression, IfStatement, WhileLoop, Literal, VariableReference
+from src.semantic_analyzer.syntatic_tree import RepeatLoop, Command, Comment, VariableDeclaration, Assignment, BinaryExpression, IfStatement, WhileLoop, Literal, VariableReference
 
 class CodeGenerator:
     def __init__(self):
@@ -17,6 +17,9 @@ class CodeGenerator:
         
     def decrease_indent(self):
         self.indent_level -= 1
+
+    def generate_output_file(self, code):
+        pass
         
     def generate(self, program):
         self.add_import("import turtle")
@@ -29,8 +32,12 @@ class CodeGenerator:
             
         imports_code = "\n".join(sorted(self.imports)) + "\n\n"
         main_code = "\n".join(self.code)
+
+        code = imports_code + main_code + "\n\nturtle.done()"
+
+        self.generate_output_file(code)
         
-        return imports_code + main_code + "\n\nturtle.done()"
+        return code
         
     def generate_declaration(self, decl):
         default_values = {
@@ -60,6 +67,9 @@ class CodeGenerator:
             if op == "%":
                 return f"math.fmod({left}, {right})"
             return f"({left} {op} {right})"
+            
+        elif isinstance(expr, Comment):
+            self.generate_comment(expr.text)
             
         else:
             raise Exception(f"Tipo de expressão não suportado: {type(expr)}")
@@ -97,11 +107,12 @@ class CodeGenerator:
             raise Exception(f"Comando não reconhecido: {cmd.name}")
             
     def generate_repeat_loop(self, cmd):
-        count_code = self.generate_expression(cmd.count)
+        count_code = cmd.count
         self.add_line(f"for _ in range(int({count_code})):")
         self.increase_indent()
         
         for inner_cmd in cmd.body:
+            print(inner_cmd)
             self.generate_command(inner_cmd)
             
         self.decrease_indent()
@@ -150,6 +161,12 @@ class CodeGenerator:
             
         elif isinstance(cmd, WhileLoop):
             self.generate_while_loop(cmd)
+
+        elif isinstance(cmd, Comment):
+            self.generate_comment(cmd.text)
             
         else:
             raise Exception(f"Tipo de comando não reconhecido: {type(cmd)}")
+        
+    def generate_comment(self, comment):
+        self.add_line(f"# {comment}")
