@@ -63,7 +63,20 @@ AST_Input_3 = Program(
                 ),
             ]
         ),
-        Command("escrever", Literal("Teste", "texto")),
+    ]
+)
+
+AST_Input_4 = Program(
+    declarations=[
+        VariableDeclaration("inteiro", ["lado"]),
+        VariableDeclaration("texto", ["cor"]),
+    ],
+    commands=[
+        Assignment("lado", Literal(5, "inteiro")),
+        Command("cor_de_fundo", Literal("black", "texto")),
+        Command("definir_espessura", Literal(2, "inteiro")),
+        Command("definir_cor", Literal("white", "texto")),
+        Command("escrever", Literal("Compiladores 2025.1", "texto")),
         Command("posicao_atual", []),
     ]
 )
