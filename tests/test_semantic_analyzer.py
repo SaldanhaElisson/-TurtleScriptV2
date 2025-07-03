@@ -59,7 +59,8 @@ AST_Input_3 = Program(
                     )
                 ),
             ]
-        )
+        ),
+        Command("escrever", Literal("Teste", "texto"))
     ]
 )
 
