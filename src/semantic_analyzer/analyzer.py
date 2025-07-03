@@ -48,6 +48,7 @@ command_signature = {
     "definir_espessura": ["inteiro"],
     "limpar_tela": [],
     "cor_de_fundo": ["texto"],
+    "escrever": ["texto", "texto"],
 }
 
 def analyze_assignment(cmd, symbol_table):
