@@ -5,6 +5,7 @@ class CodeGenerator:
         self.indent_level = 0
         self.code = []
         self.imports = set()
+        self.file_count = 0
 
         self.add_import("import turtle")
         
@@ -21,8 +22,12 @@ class CodeGenerator:
         self.indent_level -= 1
 
     def generate_output_file(self, code):
-        pass
-    
+        file = open(f"examples/output_{self.file_count}.py", "w")
+
+        file.write(code)
+        file.close()
+        self.file_count += 1
+
     def generate(self, program):    
         self.code = []
 
@@ -45,6 +50,8 @@ class CodeGenerator:
 
         main_code = "\n".join(screen_setup + self.code)
         final_code = imports_code + "\n" + main_code
+
+        self.generate_output_file(final_code)
 
         return final_code
         
@@ -110,7 +117,7 @@ class CodeGenerator:
         if cmd.name == "escrever":
             if args:
                 text = self.generate_expression(args[0])
-                font = args[1] if len(args) > 1 else '"Arial", 12, "normal"'
+                font = args[1] if len(args) > 1 else '{"Arial", 12, "normal"}'
                 self.add_line(f"t.write({text}, font={font})")
             else:
                 raise Exception("O comando 'escrever' requer pelo menos um argumento.")
