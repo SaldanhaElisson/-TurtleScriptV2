@@ -5,10 +5,12 @@ class CodeGenerator:
         self.indent_level = 0
         self.code = []
         self.imports = set()
+
+        self.add_import("import turtle")
         
     def add_import(self, module):
         self.imports.add(module)
-        
+
     def add_line(self, line):
         self.code.append("    " * self.indent_level + line)
         
@@ -20,9 +22,16 @@ class CodeGenerator:
 
     def generate_output_file(self, code):
         pass
-        
-    def generate(self, program):
-        self.add_import("import turtle")
+    
+    def generate(self, program):    
+        self.code = []
+
+        screen_setup = [
+            "screen = turtle.Screen()",
+            "t = turtle.Turtle()",
+            "screen.title(\"Resultado\")",
+            "\n"
+        ]
         
         for decl in program.declarations:
             self.generate_declaration(decl)
@@ -30,14 +39,14 @@ class CodeGenerator:
         for cmd in program.commands:
             self.generate_command(cmd)
             
-        imports_code = "\n".join(sorted(self.imports)) + "\n\n"
-        main_code = "\n".join(self.code)
-
-        code = imports_code + main_code + "\n\nturtle.done()"
-
-        self.generate_output_file(code)
+        imports_code = "\n".join(sorted(self.imports)) + "\n"
         
-        return code
+        self.add_line("\nt.done()")
+
+        main_code = "\n".join(screen_setup + self.code)
+        final_code = imports_code + "\n" + main_code
+
+        return final_code
         
     def generate_declaration(self, decl):
         default_values = {
@@ -84,20 +93,27 @@ class CodeGenerator:
         args_code = ", ".join(self.generate_expression(arg) for arg in args)
         
         command_mapping = {
-            "avancar": "turtle.forward",
-            "recuar": "turtle.backward",
-            "girar_direita": "turtle.right",
-            "girar_esquerda": "turtle.left",
-            "ir_para": "turtle.goto",
-            "levantar_caneta": "turtle.penup",
-            "abaixar_caneta": "turtle.pendown",
-            "definir_cor": "turtle.pencolor",
-            "definir_espessura": "turtle.pensize",
-            "limpar_tela": "turtle.clear",
-            "cor_de_fundo": "turtle.bgcolor",
+            "avancar": "t.forward",
+            "recuar": "t.backward",
+            "girar_direita": "t.right",
+            "girar_esquerda": "t.left",
+            "ir_para": "t.goto",
+            "levantar_caneta": "t.penup",
+            "abaixar_caneta": "t.pendown",
+            "definir_cor": "t.pencolor",
+            "definir_espessura": "t.pensize",
+            "limpar_tela": "t.clear",
+            "cor_de_fundo": "t.bgcolor",
         }
-        
-        if cmd.name in command_mapping:
+
+        if cmd.name == "escrever":
+            if args:
+                text = self.generate_expression(args[0])
+                font = args[1] if len(args) > 1 else '"Arial", 12, "normal"'
+                self.add_line(f"t.write({text}, font={font})")
+            else:
+                raise Exception("O comando 'escrever' requer pelo menos um argumento.")
+        elif cmd.name in command_mapping:
             func_name = command_mapping[cmd.name]
             if cmd.args:
                 self.add_line(f"{func_name}({args_code})")
@@ -108,7 +124,7 @@ class CodeGenerator:
             
     def generate_repeat_loop(self, cmd):
         count_code = cmd.count
-        self.add_line(f"for _ in range(int({count_code})):")
+        self.add_line(f"\nfor _ in range(int({count_code})):")
         self.increase_indent()
         
         for inner_cmd in cmd.body:
