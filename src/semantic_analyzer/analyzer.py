@@ -49,6 +49,7 @@ command_signature = {
     "limpar_tela": [],
     "cor_de_fundo": ["texto"],
     "escrever": ["texto", "texto"],
+    "posicao_atual": [],
 }
 
 def analyze_assignment(cmd, symbol_table):
