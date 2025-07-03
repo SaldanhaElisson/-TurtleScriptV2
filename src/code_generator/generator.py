@@ -26,15 +26,15 @@ class CodeGenerator:
 
         file.write(code)
         file.close()
-        self.file_count += 1
 
     def generate(self, program):    
         self.code = []
+        self.file_count += 1
 
         screen_setup = [
             "screen = turtle.Screen()",
             "t = turtle.Turtle()",
-            "screen.title(\"Resultado\")",
+            f"screen.title(\"Resultado - Exemplo {self.file_count}\")",
             "\n"
         ]
         
@@ -46,7 +46,7 @@ class CodeGenerator:
             
         imports_code = "\n".join(sorted(self.imports)) + "\n"
         
-        self.add_line("\nt.done()")
+        self.add_line("\nturtle.done()")
 
         main_code = "\n".join(screen_setup + self.code)
         final_code = imports_code + "\n" + main_code
@@ -110,7 +110,7 @@ class CodeGenerator:
             "definir_cor": "t.pencolor",
             "definir_espessura": "t.pensize",
             "limpar_tela": "t.clear",
-            "cor_de_fundo": "t.bgcolor",
+            "cor_de_fundo": "screen.bgcolor",
             "posicao_atual": "t.position",
         }
 
