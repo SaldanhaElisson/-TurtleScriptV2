@@ -104,6 +104,7 @@ class CodeGenerator:
             "definir_espessura": "t.pensize",
             "limpar_tela": "t.clear",
             "cor_de_fundo": "t.bgcolor",
+            "posicao_atual": "t.position",
         }
 
         if cmd.name == "escrever":
