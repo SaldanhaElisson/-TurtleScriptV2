@@ -1,4 +1,4 @@
-from src.semantic_analyzer.syntatic_tree import Program, Command, VariableDeclaration, Assignment, Literal, VariableReference, RepeatLoop, BinaryExpression
+from src.semantic_analyzer.syntatic_tree import Comment, Program, Command, VariableDeclaration, Assignment, Literal, VariableReference, RepeatLoop, BinaryExpression
 from src.semantic_analyzer.analyzer import analyze_program
 
 # Exemplo da input 1
@@ -47,6 +47,7 @@ AST_Input_3 = Program(
         RepeatLoop(
             count=50,
             body=[
+                Comment("Muda a cor da linha a cada iteração"),
                 Command("definir_cor", Literal("cyan", "texto")),
                 Command("avancar", VariableReference("lado")),
                 Command("girar_direita", Literal(90, "inteiro")),
