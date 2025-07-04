@@ -1,0 +1,14 @@
+inicio
+  var inteiro : lado = 10;
+  cor_de_fundo " black ";
+  definir_cor " white ";
+
+  // O laco continua apenas enquanto o lado for menor que 200
+  enquanto lado < 200 faca
+    avancar lado ;
+    girar_direita 91;
+
+    // Incrementa a variavel de controle do laco
+    lado = lado + 2;
+  fim_enquanto ;
+fim
