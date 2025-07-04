@@ -1,0 +1,14 @@
+inicio
+  var inteiro : contador = 0;
+
+  repita 10 vezes
+    // Verifica se o contador e par ou impar
+    se ( contador % 2) == 0 entao
+      definir_cor " cyan ";
+    senao
+      definir_cor " yellow ";
+    fim_se ;
+    avancar 25;
+    contador = contador + 1;
+  fim_repita ;
+fim
