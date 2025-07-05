@@ -131,12 +131,11 @@ class CodeGenerator:
             raise Exception(f"Comando não reconhecido: {cmd.name}")
             
     def generate_repeat_loop(self, cmd):
-        count_code = cmd.count
+        count_code = cmd.count.value
         self.add_line(f"\nfor _ in range(int({count_code})):")
         self.increase_indent()
         
         for inner_cmd in cmd.body:
-            print(inner_cmd)
             self.generate_command(inner_cmd)
             
         self.decrease_indent()
