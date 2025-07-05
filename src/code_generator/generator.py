@@ -117,7 +117,7 @@ class CodeGenerator:
         if cmd.name == "escrever":
             if args:
                 text = self.generate_expression(args[0])
-                font = args[1] if len(args) > 1 else '{"Arial", 12, "normal"}'
+                font = '{"Arial", 12, "normal"}'
                 self.add_line(f"t.write({text}, font={font})")
             else:
                 raise Exception("O comando 'escrever' requer pelo menos um argumento.")
