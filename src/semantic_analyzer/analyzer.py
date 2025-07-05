@@ -1,4 +1,4 @@
-from src.semantic_analyzer.syntatic_tree import BinaryExpression, Literal, VariableReference, Assignment, Command, RepeatLoop
+from src.semantic_analyzer.syntatic_tree import BinaryExpression, Literal, VariableReference, Assignment, Command, RepeatLoop, Comment, IfStatement, WhileLoop
 from src.semantic_analyzer.symbol_table import SymbolTable
 
 def infer_expression_type(expr, symbol_table):
@@ -48,7 +48,7 @@ command_signature = {
     "definir_espessura": ["inteiro"],
     "limpar_tela": [],
     "cor_de_fundo": ["texto"],
-    "escrever": ["texto", "texto"],
+    "escrever": ["texto"],
     "posicao_atual": [],
 }
 
@@ -64,16 +64,21 @@ def analyze_command_call(cmd, symbol_table):
         raise Exception(f"Erro: Comando '{cmd.name}' não existe.")
 
     expected_args = command_signature[cmd.name]
-    if len(expected_args) != len(cmd.args):
-        raise Exception(f"Erro: Comando '{cmd.name}' espera {len(expected_args)} argumento(s).")
 
-    for expected_type, arg in zip(expected_args, cmd.args):
+    args = cmd.args if isinstance(cmd.args, list) else [cmd.args]
+
+    if len(expected_args) != len(args):
+        raise Exception(f"Erro: Comando '{cmd.name}' espera {len(expected_args)} argumento(s), mas recebeu {len(args)}.")
+
+    for expected_type, arg in zip(expected_args, args):
         actual_type = infer_expression_type(arg, symbol_table)
 
         if actual_type != expected_type:
             raise Exception(f"Erro: Comando '{cmd.name}' esperava argumento '{expected_type}' mas recebeu '{actual_type}'.")
 
+
 def analyze_repeat_loop(cmd, symbol_table):
+    print(cmd.count, symbol_table)
     count_type = infer_expression_type(cmd.count, symbol_table)
 
     if count_type != 'inteiro':
@@ -91,9 +96,38 @@ def analyze_command(cmd, symbol_table):
 
     elif isinstance(cmd, RepeatLoop):
         analyze_repeat_loop(cmd, symbol_table)
+
+    elif isinstance(cmd, IfStatement):
+        analyze_if_statement(cmd, symbol_table)
+
+    elif isinstance(cmd, WhileLoop):
+        analyze_while_loop(cmd, symbol_table)
+
+    elif isinstance(cmd, Comment):
+        pass
         
     else:
         raise Exception(f"Erro: Tipo de comando não reconhecido: {type(cmd)}")
+    
+def analyze_if_statement(cmd, symbol_table):
+    cond_type = infer_expression_type(cmd.condition, symbol_table)
+    if cond_type != 'logico':
+        raise Exception("Erro: A condição do 'se' deve ser do tipo lógico.")
+    
+    for inner_cmd in cmd.true_branch:
+        analyze_command(inner_cmd, symbol_table)
+
+    if cmd.false_branch:
+        for inner_cmd in cmd.false_branch:
+            analyze_command(inner_cmd, symbol_table)
+
+def analyze_while_loop(cmd, symbol_table):
+    cond_type = infer_expression_type(cmd.condition, symbol_table)
+    if cond_type != 'logico':
+        raise Exception("Erro: A condição do 'enquanto' deve ser do tipo lógico.")
+    
+    for inner_cmd in cmd.body:
+        analyze_command(inner_cmd, symbol_table)
 
 def analyze_program(program):
     symbol_table = SymbolTable()
