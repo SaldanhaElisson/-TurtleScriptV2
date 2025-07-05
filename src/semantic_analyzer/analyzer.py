@@ -78,7 +78,6 @@ def analyze_command_call(cmd, symbol_table):
 
 
 def analyze_repeat_loop(cmd, symbol_table):
-    print(cmd.count, symbol_table)
     count_type = infer_expression_type(cmd.count, symbol_table)
 
     if count_type != 'inteiro':
