@@ -78,8 +78,8 @@ AST_Input_4 = Program(
                 IfStatement(
                     condition=BinaryExpression(
                         left=VariableReference("lado"),
-                        operator="<",
-                        right=Literal(100, "inteiro")
+                        operator=">",
+                        right=Literal(50, "inteiro")
                     ),
                     true_branch=[
                         Command("definir_cor", Literal("cyan", "texto")),
@@ -88,8 +88,8 @@ AST_Input_4 = Program(
                     ],
                     false_branch=[
                         Command("definir_cor", Literal("red", "texto")),
-                        Command("avancar", Literal(50, "inteiro")),
-                        Command("girar_direita", Literal(45, "inteiro")),
+                        Command("avancar", Literal(90, "inteiro")),
+                        Command("girar_direita", Literal(90, "inteiro")),
                     ]
                 ),
                 Command("definir_cor", Literal("cyan", "texto")),
@@ -113,13 +113,13 @@ AST_Input_4 = Program(
     ]
 )
 
-error = Program(
+Error_input = Program(
     declarations=[
         VariableDeclaration("inteiro", ["lado"]),
         VariableDeclaration("texto", ["cor"]),
     ],
     commands=[
-        Assignment("lado", Literal(5, "inteiro")),
+        Assignment("lado", Literal(5, "texto")),
         Command("cor_de_fundo", [Literal("black", "texto")]),
         Command("definir_espessura", [Literal(2, "inteiro")]),
         RepeatLoop(
