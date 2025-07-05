@@ -1,7 +1,5 @@
-from src.semantic_analyzer.syntatic_tree import Comment, Program, Command, VariableDeclaration, Assignment, Literal, VariableReference, RepeatLoop, BinaryExpression
-from src.semantic_analyzer.analyzer import analyze_program
+from src.semantic_analyzer.syntatic_tree import Comment, Program, Command, VariableDeclaration, Assignment, Literal, VariableReference, RepeatLoop, BinaryExpression, WhileLoop, IfStatement
 
-# Exemplo da input 1
 AST_Input_1 = Program(
     declarations=[],
     commands=[
@@ -17,7 +15,6 @@ AST_Input_1 = Program(
     ]
 )
 
-# Exemplo da input 2
 AST_Input_2 = Program(
     declarations=[VariableDeclaration("inteiro", ["tamanho_lado"])],
     commands=[
@@ -36,7 +33,6 @@ AST_Input_2 = Program(
     ]
 )
 
-# Exemplo da input 3
 AST_Input_3 = Program(
     declarations=[
         VariableDeclaration("inteiro", ["lado"]),
@@ -47,7 +43,7 @@ AST_Input_3 = Program(
         Command("cor_de_fundo", Literal("black", "texto")),
         Command("definir_espessura", Literal(2, "inteiro")),
         RepeatLoop(
-            count=50,
+            count=Literal(50, "inteiro"),
             body=[
                 Comment("Muda a cor da linha a cada iteração"),
                 Command("definir_cor", Literal("cyan", "texto")),
@@ -72,6 +68,42 @@ AST_Input_4 = Program(
         VariableDeclaration("texto", ["cor"]),
     ],
     commands=[
+        WhileLoop(
+            condition=BinaryExpression(
+                left=VariableReference("lado"),
+                operator="<",
+                right=Literal(100, "inteiro")
+            ),
+            body=[
+                IfStatement(
+                    condition=BinaryExpression(
+                        left=VariableReference("lado"),
+                        operator="<",
+                        right=Literal(100, "inteiro")
+                    ),
+                    true_branch=[
+                        Command("definir_cor", Literal("cyan", "texto")),
+                        Command("avancar", VariableReference("lado")),
+                        Command("girar_direita", Literal(90, "inteiro")),
+                    ],
+                    false_branch=[
+                        Command("definir_cor", Literal("red", "texto")),
+                        Command("avancar", Literal(50, "inteiro")),
+                        Command("girar_direita", Literal(45, "inteiro")),
+                    ]
+                ),
+                Command("definir_cor", Literal("cyan", "texto")),
+                Command("avancar", VariableReference("lado")),
+                Command("girar_direita", Literal(90, "inteiro")),
+                Assignment("lado",
+                    BinaryExpression(
+                        left=VariableReference("lado"),
+                        operator="+",
+                        right=Literal(5, "inteiro")
+                    )
+                ),
+            ]
+        ),
         Assignment("lado", Literal(5, "inteiro")),
         Command("cor_de_fundo", Literal("black", "texto")),
         Command("definir_espessura", Literal(2, "inteiro")),
@@ -106,10 +138,5 @@ error = Program(
     ]
 )
 
-try:
-    analyze_program(error)
-    print("Análise semântica concluída com sucesso!")
-except Exception as e:
-    print(f"Erro semântico: {e}")
 
 
