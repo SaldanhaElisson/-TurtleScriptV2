@@ -1,0 +1,24 @@
+inicio
+        var inteiro : passo , repeticoes ;
+        var texto : cor_fundo , cor_linha , titulo ;
+        var real : angulo_preciso ;
+        var logico : desenhar_forma ;
+
+        passo = 150 ;
+        repeticoes = 5 ;
+        titulo = "Desenho de uma Estrela" ;
+        cor_fundo = "black" ;
+        cor_linha = "blue" ;
+        angulo_preciso = 144.0 ;
+        desenhar_forma = verdadeiro ;
+
+        se desenhar_forma entao
+            passo = passo + 10 ;
+        senao
+            passo = passo - 10 ;
+        fim_se
+
+        enquanto repeticoes > 0 faca
+            repeticoes = repeticoes - 1 ;
+        fim_enquanto
+fim

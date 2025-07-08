@@ -1,16 +1,17 @@
 from src.errors.error_messages import ErrorMessages
 from src.errors.error import LexicalError
+from .token import Token
 from .token_class import KeyWords
 from .token_factory import TokenTypeFactory
 
 
 class TokenListTable:
     def __init__(self, token_factory: TokenTypeFactory) -> None:
-        self._token_list: list[dict] = []
+        self._token_list: list[Token] = []
         self._token_factory = token_factory
 
     @property
-    def token_list(self) -> list[dict]:
+    def token_list(self) -> list[Token]:
         return self._token_list
 
     @property
@@ -28,16 +29,11 @@ class TokenListTable:
             lexeme = int(lexeme)
 
         if token_type is None:
-            raise LexicalError(ErrorMessages.UNKNOWN_SYMBOL.value, line, column, lexeme)
+            token_type = "IDENTIFIER"
 
-        token = {
-            "lexeme": lexeme,
-            "type": token_type,
-            "ref_type": ref_type,
-            "line": line,
-            "column": column,
-        }
+        token = Token(token_type, lexeme, line, column)
+
         self.token_list.append(token)
 
-    def get_tokens(self) -> list[dict]:
+    def get_tokens(self) -> list[Token]:
         return self.token_list
