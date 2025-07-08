@@ -46,3 +46,45 @@ def calculate_first_set_for_sequence(symbol_sequence, grammar_rules, terminal_sy
         first_result_set.add(current_symbol)
 
     return first_result_set
+
+def compute_all_first_sets_for_grammar(grammar_rules, non_terminals, terminal_symbols):
+    """
+    Calculates the FIRST set for all non-terminals in the grammar.
+
+    Args:
+        grammar_rules (dict): A dictionary representing the grammar rules
+                              (NonTerminal: [list of productions, where each production is a list of symbols]).
+                              Example: {'E': [['T', '+', 'E'], ['T']], 'T': [['F', '*', 'T'], ['F']]}
+        non_terminals (set): A set of all non-terminal symbols in the grammar.
+        terminal_symbols (set): A set of all terminal symbols in the grammar.
+
+    Returns:
+        dict: A dictionary where keys are non-terminals and values are their calculated FIRST sets.
+    """
+
+    first_sets_cache = {}
+    for terminal in terminal_symbols:
+        first_sets_cache[terminal] = {terminal}
+
+    first_sets_cache['#'] = {'#'}
+
+    for non_terminal in non_terminals:
+        first_sets_cache[non_terminal] = set()
+
+
+    changed = True
+    while changed:
+        changed = False
+        for non_terminal in non_terminals:
+            current_first_set = first_sets_cache[non_terminal].copy()
+
+            for production in grammar_rules.get(non_terminal, []):
+                first_of_production = calculate_first_set_for_sequence(
+                    production, grammar_rules, terminal_symbols, first_sets_cache
+                )
+                first_sets_cache[non_terminal].update(first_of_production)
+
+            if current_first_set != first_sets_cache[non_terminal]:
+                changed = True
+
+    return first_sets_cache

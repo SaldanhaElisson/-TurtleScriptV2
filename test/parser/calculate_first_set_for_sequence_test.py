@@ -1,53 +1,181 @@
-# Conteúdo COMPLETO de src/parser/calculate_first_set.py
-# (Remova qualquer outra coisa que possa estar lá, a menos que seja outra função ou import necessário)
+import unittest
+from src.parser.calculate_first_set import calculate_first_set_for_sequence
+from src.parser.calculate_first_set import compute_all_first_sets_for_grammar
 
-def calculate_first_set_for_sequence(symbol_sequence, grammar_rules, terminal_symbols, first_sets_cache):
-    """
-    Recursively calculates the FIRST set for a given sequence of symbols.
+class TestFirstSets(unittest.TestCase):
 
-    Args:
-        symbol_sequence (list): A list of symbols (terminals and/or non-terminals).
-        grammar_rules (dict): The grammar rules dictionary mapping non-terminals to productions.
-        terminal_symbols (set): A set of all terminal symbols in the grammar.
-        first_sets_cache (dict): A dictionary that stores pre-calculated FIRST sets for individual
-                                 non-terminals and terminals. This is crucial for recursion
-                                 and efficiency.
+    def test_calculate_first_set_for_sequence_terminals(self):
+        grammar = {}
+        terminals = {'a', 'b', 'c'}
+        cache = {}
+        self.assertEqual(calculate_first_set_for_sequence(['a', 'B'], grammar, terminals, cache), {'a'})
+        self.assertEqual(calculate_first_set_for_sequence(['b'], grammar, terminals, cache), {'b'})
 
-    Returns:
-        set: The calculated FIRST set for the symbol_sequence.
-    """
-    first_result_set = set()
+    def test_calculate_first_set_for_sequence_epsilon(self):
+        grammar = {}
+        terminals = set()
+        cache = {}
+        self.assertEqual(calculate_first_set_for_sequence([], grammar, terminals, cache), {'#'})
+        self.assertEqual(calculate_first_set_for_sequence(['#'], grammar, terminals, cache), {'#'})
 
-    if not symbol_sequence:
-        first_result_set.add('#')
-        return first_result_set
+    def test_calculate_first_set_for_sequence_non_terminals(self):
 
-    current_symbol = symbol_sequence[0]
+        grammar = {
+            'S': [['A', 'B']],
+            'A': [['a'], ['#']],
+            'B': [['b']]
+        }
+        terminals = {'a', 'b', 'c'}
+        # Cache simulado com FIRST de A e B já calculados
+        cache = {
+            'a': {'a'}, 'b': {'b'}, '#': {'#'},
+            'A': {'a', '#'},
+            'B': {'b'}
+        }
+        # FIRST(A B) = (FIRST(A) - {#}) U FIRST(B) se # in FIRST(A)
+        # FIRST(A B) = ({'a'} - {#}) U {'b'} = {'a', 'b'}
+        self.assertEqual(calculate_first_set_for_sequence(['A', 'B'], grammar, terminals, cache), {'a', 'b'})
 
-    # Rule 1: If the current symbol is a terminal
-    if current_symbol in terminal_symbols:
-        first_result_set.add(current_symbol)
-        return first_result_set
-    # Rule 3: If the current symbol is epsilon itself
-    elif current_symbol == '#':
-        first_result_set.add('#')
-        return first_result_set
 
-    # Rule 2: If the current symbol is a non-terminal
-    if current_symbol in grammar_rules:
-        # Get the FIRST set of the non-terminal from the cache if available.
-        first_of_current_symbol = first_sets_cache.get(current_symbol, set())
+        grammar2 = {
+            'S': [['X', 'Y']],
+            'X': [['x']],
+            'Y': [['y']]
+        }
+        terminals2 = {'x', 'y'}
+        cache2 = {
+            'x': {'x'}, 'y': {'y'}, '#': {'#'},
+            'X': {'x'},
+            'Y': {'y'}
+        }
+        self.assertEqual(calculate_first_set_for_sequence(['X', 'Y'], grammar2, terminals2, cache2), {'x'})
 
-        first_result_set.update(s for s in first_of_current_symbol if s != '#')
 
-        if '#' in first_of_current_symbol and len(symbol_sequence) > 1:
-            rest_of_sequence_first = calculate_first_set_for_sequence(
-                symbol_sequence[1:], grammar_rules, terminal_symbols, first_sets_cache
-            )
-            first_result_set.update(rest_of_sequence_first)
-        elif '#' in first_of_current_symbol and len(symbol_sequence) == 1:
-            first_result_set.add('#')
-    else: # Este 'else' é o tratamento para símbolos desconhecidos / literais
-        first_result_set.add(current_symbol)
+        grammar3 = {
+            'S': [['A', 'B']],
+            'A': [['#']],
+            'B': [['#']]
+        }
+        terminals3 = set()
+        cache3 = {
+            '#': {'#'},
+            'A': {'#'},
+            'B': {'#'}
+        }
+        # FIRST(A B) = {#}
+        self.assertEqual(calculate_first_set_for_sequence(['A', 'B'], grammar3, terminals3, cache3), {'#'})
 
-    return first_result_set
+
+    def test_compute_all_first_sets_grammar_simple(self):
+
+        grammar = {
+            'S': [['A', 'B']],
+            'A': [['a']],
+            'B': [['b']]
+        }
+        non_terminals = {'S', 'A', 'B'}
+        terminal_symbols = {'a', 'b'}
+        expected_firsts = {
+            'a': {'a'}, 'b': {'b'}, '#': {'#'},
+            'A': {'a'},
+            'B': {'b'},
+            'S': {'a'}
+        }
+        result = compute_all_first_sets_for_grammar(grammar, non_terminals, terminal_symbols)
+        # Usamos assertDictEqual para comparar dicionários
+        # Para conjuntos, a ordem não importa
+        for key in expected_firsts:
+            self.assertIn(key, result) # Garante que a chave existe no resultado
+            self.assertEqual(result[key], expected_firsts[key])
+
+    def test_compute_all_first_sets_grammar_with_epsilon(self):
+        # Gramática com epsilon e dependências
+        # S -> A B
+        # A -> a | #
+        # B -> b | #
+        grammar = {
+            'S': [['A', 'B']],
+            'A': [['a'], ['#']],
+            'B': [['b'], ['#']]
+        }
+        non_terminals = {'S', 'A', 'B'}
+        terminal_symbols = {'a', 'b'}
+        expected_firsts = {
+            'a': {'a'}, 'b': {'b'}, '#': {'#'},
+            'A': {'a', '#'},
+            'B': {'b', '#'},
+            'S': {'a', 'b', '#'} # FIRST(A B) = (FIRST(A)-{#}) U FIRST(B) se # in FIRST(A) = ({'a'}) U {'b', '#'} = {'a', 'b', '#'}
+        }
+        result = compute_all_first_sets_for_grammar(grammar, non_terminals, terminal_symbols)
+        for key in expected_firsts:
+            self.assertIn(key, result)
+            self.assertEqual(result[key], expected_firsts[key])
+
+    def test_compute_all_first_sets_grammar_indirect_epsilon(self):
+        # Teste com epsilon indireto
+        # X -> Y Z
+        # Y -> y | #
+        # Z -> z | #
+        grammar = {
+            'X': [['Y', 'Z']],
+            'Y': [['y'], ['#']],
+            'Z': [['z'], ['#']]
+        }
+        non_terminals = {'X', 'Y', 'Z'}
+        terminal_symbols = {'y', 'z'}
+        expected_firsts = {
+            'y': {'y'}, 'z': {'z'}, '#': {'#'},
+            'Y': {'y', '#'},
+            'Z': {'z', '#'},
+            'X': {'y', 'z', '#'} # FIRST(Y Z) = (FIRST(Y)-{#}) U FIRST(Z) se # in FIRST(Y) = ({'y'}) U {'z', '#'} = {'y', 'z', '#'}
+        }
+        result = compute_all_first_sets_for_grammar(grammar, non_terminals, terminal_symbols)
+        for key in expected_firsts:
+            self.assertIn(key, result)
+            self.assertEqual(result[key], expected_firsts[key])
+
+    def test_compute_all_first_sets_grammar_with_cycles(self):
+        # Teste com ciclo simples (requer a iteração de ponto fixo)
+        # A -> B c
+        # B -> A d | e
+        # A gramática precisa ser pré-processada para remover recursão à esquerda
+        # Assumimos que o input já está limpo para LL(1), então este teste simula um caso onde
+        # a dependência é resolvida por múltiplas iterações.
+        # Ex: E -> T E'
+        # E' -> + T E' | #
+        # T -> F T'
+        # T' -> * F T' | #
+        # F -> ( E ) | id
+
+        grammar = {
+            'E': [['T', 'E_prime']],
+            'E_prime': [['+', 'T', 'E_prime'], ['#']],
+            'T': [['F', 'T_prime']],
+            'T_prime': [['*', 'F', 'T_prime'], ['#']],
+            'F': [['(', 'E', ')'], ['id']]
+        }
+        non_terminals = {'E', 'E_prime', 'T', 'T_prime', 'F'}
+        terminal_symbols = {'+', '*', '(', ')', 'id'}
+
+        expected_firsts = {
+            '+': {'+'}, '*': {'*'}, '(': {'('}, ')': {')'}, 'id': {'id'}, '#': {'#'},
+            'F': {'(', 'id'},
+            'T_prime': {'*', '#'},
+            'T': {'(', 'id'}, # FIRST(F T_prime) = FIRST(F) = {'(', 'id'}
+            'E_prime': {'+', '#'},
+            'E': {'(', 'id'} # FIRST(T E_prime) = FIRST(T) = {'(', 'id'}
+        }
+        result = compute_all_first_sets_for_grammar(grammar, non_terminals, terminal_symbols)
+        for key in expected_firsts:
+            self.assertIn(key, result)
+            self.assertEqual(result[key], expected_firsts[key])
+
+    def test_compute_all_first_sets_empty_grammar(self):
+        # Teste com gramática vazia
+        grammar = {}
+        non_terminals = set()
+        terminal_symbols = set()
+        expected_firsts = {'#': {'#'}} # Epsilon deve estar lá por padrão
+        result = compute_all_first_sets_for_grammar(grammar, non_terminals, terminal_symbols)
+        self.assertEqual(result, expected_firsts)
+

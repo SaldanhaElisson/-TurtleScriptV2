@@ -1,142 +1,167 @@
 import unittest
-from src.parser.calculate_follow_set import calculate_follow_set
+from src.parser.calculate_follow_set import compute_all_follows
 
-class TestCalculateFollowSet(unittest.TestCase):
+class TestFollowSets(unittest.TestCase):
 
-    def setUp(self):
-        self.grammar1 = {
+    def test_simple_grammar_no_epsilon(self):
+        # Gramática:
+        # S -> A B
+        # A -> a
+        # B -> b
+        # Expected: FOLLOW(S) = {$}
+        #           FOLLOW(A) = {b}
+        #           FOLLOW(B) = {$}
+        grammar_rules = {
             'S': [['A', 'B']],
             'A': [['a']],
-            'B': [['c']]
-        }
-        self.start_symbol1 = 'S'
-        self.first_sets1 = {
-            'a': {'a'},
-            'b': {'b'},
-            'c': {'c'},
-            '#': {'#'},
-            'S': {'a'},
-            'A': {'a'},
-            'B': {'c'}
-        }
-
-
-        self.grammar2 = {
-            'S': [['A', 'B']],
-            'A': [['a'], ['#']],
             'B': [['b']]
         }
-        self.start_symbol2 = 'S'
-        self.first_sets2 = {
-            'a': {'a'},
-            'b': {'b'},
-            '#': {'#'},
-            'S': {'a', 'b'},
-            'A': {'a', '#'},
-            'B': {'b'}
-        }
+        non_terminals = {'S', 'A', 'B'}
+        terminal_symbols = {'a', 'b'}
+        start_symbol = 'S'
 
-
-        self.grammar3 = {
-            'S': [['A', 'B']],
-            'A': [['a']],
-            'B': [['C']],
-            'C': [['c'], ['#']]
-        }
-        self.start_symbol3 = 'S'
-        self.first_sets3 = {
-            'a': {'a'},
-            'c': {'c'},
-            '#': {'#'},
-            'S': {'a'},
+        # FIRST sets pre-calculados (necessários para FOLLOW)
+        first_sets = {
+            'a': {'a'}, 'b': {'b'}, '#': {'#'},
             'A': {'a'},
-            'B': {'c', '#'},
-            'C': {'c', '#'}
+            'B': {'b'},
+            'S': {'a'}
         }
 
-        self.grammar4 = {
-            'E': [['T', 'E\'']],
-            'E\'': [['+', 'T', 'E\''], ['#']],
-            'T': [['F', 'T\'']],
-            'T\'': [['*', 'F', 'T\''], ['#']],
+        expected_follows = {
+            'S': {'$'},
+            'A': {'b'}, # FOLLOW(A) porque A B, FIRST(B) = {b}
+            'B': {'$'}  # FOLLOW(B) porque S -> A B, B é o último, então FOLLOW(B) = FOLLOW(S)
+        }
+
+        result = compute_all_follows(start_symbol, grammar_rules, non_terminals, first_sets)
+        for nt, expected_set in expected_follows.items():
+            self.assertIn(nt, result)
+            self.assertEqual(result[nt], expected_set)
+
+    def test_grammar_with_epsilon_in_beta(self):
+        # Gramática:
+        # S -> A B C
+        # A -> a
+        # B -> b | #
+        # C -> c
+        # Expected: FOLLOW(S) = {$}
+        #           FOLLOW(A) = {b, c} (b do FIRST(B), c do FIRST(C) se B é epsilon)
+        #           FOLLOW(B) = {c} (c do FIRST(C) ou FOLLOW(S) se C é epsilon - mas C não é)
+        #           FOLLOW(C) = {$}
+        grammar_rules = {
+            'S': [['A', 'B', 'C']],
+            'A': [['a']],
+            'B': [['b'], ['#']],
+            'C': [['c']]
+        }
+        non_terminals = {'S', 'A', 'B', 'C'}
+        terminal_symbols = {'a', 'b', 'c'}
+        start_symbol = 'S'
+
+        first_sets = {
+            'a': {'a'}, 'b': {'b'}, 'c': {'c'}, '#': {'#'},
+            'A': {'a'},
+            'B': {'b', '#'},
+            'C': {'c'},
+            'S': {'a'}
+        }
+
+        expected_follows = {
+            'S': {'$'},
+            'A': {'b', 'c'}, # FIRST(B)={b,#}, B pode ser epsilon, então FIRST(C)={c} também entra.
+            'B': {'c'},      # FIRST(C)={c}
+            'C': {'$'}       # C é o último em S -> ABC, então FOLLOW(C)=FOLLOW(S)
+        }
+
+        result = compute_all_follows(start_symbol, grammar_rules, non_terminals, first_sets)
+        for nt, expected_set in expected_follows.items():
+            self.assertIn(nt, result)
+            self.assertEqual(result[nt], expected_set)
+
+    def test_grammar_with_left_recursion_removed_style(self):
+        # Gramática (após remoção de recursão à esquerda):
+        # E  -> T E'
+        # E' -> + T E' | #
+        # T  -> F T'
+        # T' -> * F T' | #
+        # F  -> ( E ) | id
+        # Expected:
+        # FOLLOW(E)  = {$, ')'}
+        # FOLLOW(E') = {$, ')'} (E' é último em E, E' é último em E' -> + T E', então FOLLOW(E') = FOLLOW(E))
+        # FOLLOW(T)  = {+, $, ')'} (FOLLOW(T) de E->T E', FIRST(E')={+,#}, se E' é # então FOLLOW(E))
+        # FOLLOW(T') = {+, $, ')'} (T' é último em T, T' é último em T' -> * F T', então FOLLOW(T') = FOLLOW(T))
+        # FOLLOW(F)  = {*, +, $, ')'} (FOLLOW(F) de T->F T', FIRST(T')={*,#}, se T' é # então FOLLOW(T))
+
+        grammar_rules = {
+            'E': [['T', 'E_prime']],
+            'E_prime': [['+', 'T', 'E_prime'], ['#']],
+            'T': [['F', 'T_prime']],
+            'T_prime': [['*', 'F', 'T_prime'], ['#']],
             'F': [['(', 'E', ')'], ['id']]
         }
-        self.start_symbol4 = 'E'
-        self.first_sets4 = {
-            'E': {'(', 'id'},
-            'E\'': {'+', '#'},
-            'T': {'(', 'id'},
-            'T\'': {'*', '#'},
+        non_terminals = {'E', 'E_prime', 'T', 'T_prime', 'F'}
+        terminal_symbols = {'+', '*', '(', ')', 'id'}
+        start_symbol = 'E'
+
+        # FIRST sets pre-calculados para esta gramática
+        first_sets = {
+            '+': {'+'}, '*': {'*'}, '(': {'('}, ')': {')'}, 'id': {'id'}, '#': {'#'},
             'F': {'(', 'id'},
-            '+': {'+'},
-            '*': {'*'},
-            '(': {'('},
-            ')': {')'},
-            'id': {'id'},
-            '#': {'#'}
+            'T_prime': {'*', '#'},
+            'T': {'(', 'id'},
+            'E_prime': {'+', '#'},
+            'E': {'(', 'id'}
         }
 
-    def test_follow_start_symbol(self):
-        self.assertEqual(calculate_follow_set('S', self.start_symbol1, self.grammar1, self.first_sets1), {'$'})
-
-    def test_follow_rule2_terminal(self):
-        self.assertEqual(calculate_follow_set('A', self.start_symbol1, self.grammar1, self.first_sets1), {'c'})
-
-    def test_follow_rule3_epsilon_and_follow_lhs(self):
-
-        self.assertEqual(calculate_follow_set('A', self.start_symbol2, self.grammar2, self.first_sets2), {'b', '$'})
-
-    def test_follow_rule3_epsilon_and_follow_lhs_chained(self):
-
-        self.assertEqual(calculate_follow_set('A', self.start_symbol3, self.grammar3, self.first_sets3), {'c'})
-        self.assertEqual(calculate_follow_set('B', self.start_symbol3, self.grammar3, self.first_sets3), {'$'})
-        self.assertEqual(calculate_follow_set('C', self.start_symbol3, self.grammar3, self.first_sets3), {'$'})
-
-    def test_follow_for_intermediate_non_terminal(self):
-        self.assertEqual(calculate_follow_set('B', self.start_symbol1, self.grammar1, self.first_sets1), {'$'})
-
-    def test_follow_complex_grammar_E_prime(self):
-
-
-        self.assertEqual(calculate_follow_set('E', self.start_symbol4, self.grammar4, self.first_sets4), {')', '$'})
-        self.assertEqual(calculate_follow_set('E\'', self.start_symbol4, self.grammar4, self.first_sets4), {')', '$'})
-
-    def test_follow_complex_grammar_T_prime(self):
-
-        self.assertEqual(calculate_follow_set('T', self.start_symbol4, self.grammar4, self.first_sets4),
-                         {'+', ')', '$'})
-        self.assertEqual(calculate_follow_set('T\'', self.start_symbol4, self.grammar4, self.first_sets4),
-                         {'+', ')', '$'})
-
-    def test_follow_complex_grammar_F(self):
-
-        self.assertEqual(calculate_follow_set('F', self.start_symbol4, self.grammar4, self.first_sets4),
-                         {'*', '+', ')', '$'})
-
-    def test_non_terminal_not_in_rhs(self):
-
-        grammar_isolated = {'A': [['a']], 'B': [['b']]}
-        start_isolated = 'A'
-        first_isolated = {'a': {'a'}, 'b': {'b'}, 'A': {'a'}, 'B': {'b'}}
-
-
-        self.assertEqual(calculate_follow_set('B', start_isolated, grammar_isolated, first_isolated), set())
-
-    def test_recursion_avoidance(self):
-
-        grammar_recursive_A = {
-            'S': [['A']],
-            'A': [['B', 'A'], ['c']],
-            'B': [['b']]
+        expected_follows = {
+            'E': {'$', ')'},
+            'E_prime': {'$', ')'},
+            'T': {'+', '$', ')'},
+            'T_prime': {'+', '$', ')'},
+            'F': {'*', '+', '$', ')'}
         }
-        start_recursive_A = 'S'
-        first_recursive_A = {
-            'S': {'b', 'c'},
-            'A': {'b', 'c'},
-            'B': {'b'},
-            'b': {'b'},
-            'c': {'c'}
+
+        result = compute_all_follows(start_symbol, grammar_rules, non_terminals, first_sets)
+        for nt, expected_set in expected_follows.items():
+            self.assertIn(nt, result)
+            self.assertEqual(result[nt], expected_set, f"Falha em FOLLOW({nt}): Esperado {expected_set}, Obtido {result[nt]}")
+
+
+    def test_grammar_with_mutual_recursion_for_follow(self):
+        # Gramática com dependência mútua para FOLLOW
+        # S -> A B
+        # A -> c
+        # B -> d | S
+        # Expected:
+        # FOLLOW(S) = {$, d} (d de B->S e $ de S ser start_symbol)
+        # FOLLOW(A) = {d, $} (de S->AB, FOLLOW(A) = FIRST(B) = {d} se B não tem epsilon. Mas B tem 'S', então FOLLOW(B) = FOLLOW(S))
+        # FOLLOW(B) = {$, d} (de S->AB, B é o último, então FOLLOW(B) = FOLLOW(S) = {$, d})
+
+        grammar_rules = {
+            'S': [['A', 'B']],
+            'A': [['c']],
+            'B': [['d'], ['S']]
         }
-        self.assertEqual(calculate_follow_set('A', start_recursive_A, grammar_recursive_A, first_recursive_A), {'$'})
-        self.assertEqual(calculate_follow_set('B', start_recursive_A, grammar_recursive_A, first_recursive_A),
-                         {'b', 'c'})
+        non_terminals = {'S', 'A', 'B'}
+        terminal_symbols = {'c', 'd'}
+        start_symbol = 'S'
+
+        first_sets = {
+            'c': {'c'}, 'd': {'d'}, '#': {'#'},
+            'A': {'c'},
+            'B': {'d', 'c'},
+            'S': {'c'}
+        }
+
+        expected_follows = {
+            'S': {'$'},
+            'A': {'d', 'c'},
+            'B': {'$'}
+        }
+
+        result = compute_all_follows(start_symbol, grammar_rules, non_terminals, first_sets)
+        for nt, expected_set in expected_follows.items():
+            self.assertIn(nt, result)
+            self.assertEqual(result[nt], expected_set, f"Falha em FOLLOW({nt}): Esperado {expected_set}, Obtido {result[nt]}")
+

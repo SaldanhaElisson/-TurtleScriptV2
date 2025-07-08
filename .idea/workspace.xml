@@ -5,13 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d72477f0-37db-41d9-b150-784f5412d6f0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/parser/calculate_first_set.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/parser/calculate_follow_set.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/parser/calculate_first_set_for_sequence_test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/parser/calculate_follow_set_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/TurtleScriptV2.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/parser/parse_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/parser/left_factoring_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/parser/left_factoring_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/parser/remove_left_recursion_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/parser/remove_left_recursion_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parser/calculate_first_set.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser/calculate_first_set.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parser/calculate_follow_set.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser/calculate_follow_set.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parser/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser/parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/parser/calculate_first_set_for_sequence_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/parser/calculate_first_set_for_sequence_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/parser/calculate_follow_set_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/parser/calculate_follow_set_test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +23,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="Python Unit Test" />
       </list>
     </option>
   </component>
@@ -40,11 +42,28 @@
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Python tests.Python tests for calculate_first_set_for_sequence_test.TestCalculateFirstSetForSequence.executor": "Run",
+    "Python tests.Python tests for calculate_first_set_for_sequence_test.TestFirstSets.executor": "Run",
     "Python tests.Python tests for calculate_follow_set_test.TestCalculateFollowSet.executor": "Run",
+    "Python tests.Python tests for calculate_follow_set_test.TestFollowSets.executor": "Run",
+    "Python tests.Python tests for calculate_follow_set_test.TestFollowSets.test_grammar_with_epsilon_in_beta.executor": "Run",
+    "Python tests.Python tests for calculate_follow_set_test.TestFollowSets.test_grammar_with_left_recursion_removed_style.executor": "Run",
+    "Python tests.Python tests for calculate_follow_set_test.TestFollowSets.test_grammar_with_mutual_recursion_for_follow.executor": "Run",
+    "Python tests.Python tests for calculate_follow_set_test.TestFollowSets.test_simple_grammar_no_epsilon.executor": "Run",
     "Python tests.Python tests for left_factoring_test.TestLeftFactoringConcise.executor": "Run",
+    "Python tests.Python tests for parse_test.TestLL1ParseTable.executor": "Run",
+    "Python tests.Python tests for parse_test.TestLL1Parser.executor": "Run",
+    "Python tests.Python tests for parse_test.TestLL1Parser.test_invalid_empty_input.executor": "Run",
+    "Python tests.Python tests for parse_test.TestLL1Parser.test_invalid_non_ll1_grammar.executor": "Run",
+    "Python tests.Python tests for parse_test.TestLL1Parser.test_invalid_unexpected_symbol_on_stack.executor": "Run",
+    "Python tests.Python tests for parse_test.TestLL1Parser.test_invalid_unmatched_terminal.executor": "Run",
+    "Python tests.Python tests for parse_test.TestLL1Parser.test_valid_complex_expression.executor": "Run",
+    "Python tests.Python tests for parse_test.TestLL1Parser.test_valid_simple_expression.executor": "Run",
+    "Python tests.Python tests for parse_test.TestParseTreeGeneration.executor": "Run",
+    "Python tests.Python tests for parse_test.TestParseTreeGeneration.test_valid_simple_expression_tree.executor": "Run",
     "Python tests.Python tests for remove_left_recursion_test.TestRemoveLeftRecursion.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "feat/ll1-define-grammer",
     "last_opened_file_path": "/home/elisson/faculdade/TurtleScriptV2",
     "node.js.detected.package.eslint": "true",
@@ -55,8 +74,8 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Python tests.Python tests for calculate_follow_set_test.TestCalculateFollowSet">
-    <configuration name="Python tests for calculate_first_set_for_sequence_test.TestCalculateFirstSetForSequence" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python tests.Python tests for parse_test.TestLL1Parser">
+    <configuration name="Python tests for parse_test.TestLL1ParseTable" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="TurtleScriptV2" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -68,11 +87,11 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;calculate_first_set_for_sequence_test.TestCalculateFirstSetForSequence&quot;" />
+      <option name="_new_target" value="&quot;parse_test.TestLL1ParseTable&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for calculate_follow_set_test.TestCalculateFollowSet" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for parse_test.TestLL1Parser" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="TurtleScriptV2" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -84,11 +103,11 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;calculate_follow_set_test.TestCalculateFollowSet&quot;" />
+      <option name="_new_target" value="&quot;parse_test.TestLL1Parser&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for left_factoring_test.TestLeftFactoringConcise" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for parse_test.TestLL1Parser.test_invalid_unexpected_symbol_on_stack" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="TurtleScriptV2" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -100,11 +119,11 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;left_factoring_test.TestLeftFactoringConcise&quot;" />
+      <option name="_new_target" value="&quot;parse_test.TestLL1Parser.test_invalid_unexpected_symbol_on_stack&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for remove_left_recursion_test.TestRemoveLeftRecursion" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for parse_test.TestParseTreeGeneration" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="TurtleScriptV2" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -116,11 +135,11 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;remove_left_recursion_test.TestRemoveLeftRecursion&quot;" />
+      <option name="_new_target" value="&quot;parse_test.TestParseTreeGeneration&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test.parser.remove_left_recursion_test.TestRemoveLeftRecursion" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for parse_test.TestParseTreeGeneration.test_valid_simple_expression_tree" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="TurtleScriptV2" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -132,17 +151,17 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test.parser.remove_left_recursion_test.TestRemoveLeftRecursion&quot;" />
+      <option name="_new_target" value="&quot;parse_test.TestParseTreeGeneration.test_valid_simple_expression_tree&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests for calculate_follow_set_test.TestCalculateFollowSet" />
-        <item itemvalue="Python tests.Python tests for calculate_first_set_for_sequence_test.TestCalculateFirstSetForSequence" />
-        <item itemvalue="Python tests.Python tests for left_factoring_test.TestLeftFactoringConcise" />
-        <item itemvalue="Python tests.Python tests for remove_left_recursion_test.TestRemoveLeftRecursion" />
-        <item itemvalue="Python tests.Python tests for test.parser.remove_left_recursion_test.TestRemoveLeftRecursion" />
+        <item itemvalue="Python tests.Python tests for parse_test.TestLL1Parser" />
+        <item itemvalue="Python tests.Python tests for parse_test.TestLL1ParseTable" />
+        <item itemvalue="Python tests.Python tests for parse_test.TestParseTreeGeneration.test_valid_simple_expression_tree" />
+        <item itemvalue="Python tests.Python tests for parse_test.TestParseTreeGeneration" />
+        <item itemvalue="Python tests.Python tests for parse_test.TestLL1Parser.test_invalid_unexpected_symbol_on_stack" />
       </list>
     </recent_temporary>
   </component>
@@ -162,14 +181,26 @@
       <option name="presentableId" value="Default" />
       <updated>1751404704843</updated>
       <workItem from="1751404705931" duration="627000" />
-      <workItem from="1751405340081" duration="5331000" />
+      <workItem from="1751405340081" duration="5817000" />
+      <workItem from="1751937281898" duration="3089000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/test/parser/calculate_follow_set_test.py</url>
+          <line>41</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/TurtleScriptV2$.coverage" NAME=" Coverage Results" MODIFIED="1751410975396" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/parser" />
+    <SUITE FILE_PATH="coverage/TurtleScriptV2$.coverage" NAME=" Coverage Results" MODIFIED="1751940301090" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/parser" />
   </component>
 </project>

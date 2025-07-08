@@ -1,53 +1,59 @@
-def calculate_follow_set(target_non_terminal, start_symbol, grammar_rules, first_sets):
+def compute_all_follows(start_symbol, grammar_rules, non_terminals, first_sets):
     """
-    Calculates the FOLLOW set for a given non-terminal.
+    Calculates the FOLLOW set for all non-terminals in the grammar.
 
     Args:
-        target_non_terminal (str): The non-terminal for which to calculate the FOLLOW set.
         start_symbol (str): The starting non-terminal of the grammar.
         grammar_rules (dict): A dictionary representing the grammar rules
-                              (NonTerminal: [list of productions]).
+                              (NonTerminal: [list of productions, where each production is a list of symbols]).
+        non_terminals (set): A set of all non-terminal symbols in the grammar.
         first_sets (dict): A dictionary containing pre-calculated FIRST sets
-                           for all grammar symbols (e.g., {'A': {'a', 'b'}}).
+                           for all grammar symbols (terminals, non-terminals, and '#').
 
     Returns:
-        set: A set of terminals in the FOLLOW set for the target_non_terminal.
-             Returns an empty set if no FOLLOW symbols are found.
+        dict: A dictionary where keys are non-terminals and values are their calculated FOLLOW sets.
     """
-    follow_set_result = set()
 
-    if target_non_terminal == start_symbol:
-        follow_set_result.add('$')
+    follows = {nt: set() for nt in non_terminals}
+    follows[start_symbol].add('$')
 
-    for current_lhs_non_terminal, productions_rhs in grammar_rules.items():
-        for production_sequence in productions_rhs:
-            indices_of_target = [i for i, symbol in enumerate(production_sequence) if symbol == target_non_terminal]
+    changed = True
+    while changed:
+        changed = False
+        for non_terminal_to_compute_follow in non_terminals:
+            current_follow_set = follows[non_terminal_to_compute_follow].copy()
 
-            for index in indices_of_target:
-                beta_sequence = production_sequence[index + 1:]
+            # Itera sobre todas as regras da gramática para encontrar ocorrências do non_terminal_to_compute_follow
+            for current_lhs_non_terminal, productions_rhs in grammar_rules.items():
+                for production_sequence in productions_rhs:
+                    indices_of_target = [i for i, symbol in enumerate(production_sequence)
+                                         if symbol == non_terminal_to_compute_follow]
 
-                if beta_sequence:
+                    for index in indices_of_target:
+                        # Pega a sequência de símbolos que vêm DEPOIS do não-terminal alvo
+                        beta_sequence = production_sequence[index + 1:]
 
-                    first_of_beta = calculate_first_of_sequence(beta_sequence,
-                                                                first_sets)
+                        if beta_sequence:
+                            first_of_beta = calculate_first_of_sequence(beta_sequence, first_sets)
+                            follows[non_terminal_to_compute_follow].update(term for term in first_of_beta if term != '#')
 
-                    follow_set_result.update(term for term in first_of_beta if term != '#')
+                            # Regra 2: Se '#' está em FIRST(Beta), então FOLLOW(A) = FOLLOW(A) U FOLLOW(LHS)
+                            if '#' in first_of_beta:
 
-                    if '#' in first_of_beta:
+                                if non_terminal_to_compute_follow != current_lhs_non_terminal:
+                                    follows[non_terminal_to_compute_follow].update(
+                                        follows.get(current_lhs_non_terminal, set())
+                                    )
+                        else:
 
-                        if target_non_terminal != current_lhs_non_terminal:
-                            follow_set_result.update(
-                                calculate_follow_set(current_lhs_non_terminal, start_symbol, grammar_rules, first_sets)
-                            )
-                else:
-                    if target_non_terminal != current_lhs_non_terminal:
-                        # Recursive call, passing all necessary parameters
-                        follow_set_result.update(
-                            calculate_follow_set(current_lhs_non_terminal, start_symbol, grammar_rules, first_sets)
-                        )
+                            if non_terminal_to_compute_follow != current_lhs_non_terminal:
+                                follows[non_terminal_to_compute_follow].update(
+                                    follows.get(current_lhs_non_terminal, set())
+                                )
 
-    return follow_set_result
-
+            if current_follow_set != follows[non_terminal_to_compute_follow]:
+                changed = True
+    return follows
 
 def calculate_first_of_sequence(symbols_sequence, first_sets):
     """Calculates the FIRST set for a sequence of symbols."""
@@ -60,13 +66,12 @@ def calculate_first_of_sequence(symbols_sequence, first_sets):
             if '#' not in first_sets[symbol]:
                 all_can_be_epsilon = False
                 break
-        else:  # It's a terminal or unknown symbol
+        else:
             result_first.add(symbol)
             all_can_be_epsilon = False
             break
 
     if all_can_be_epsilon:
-        result_first.add('#')  
+        result_first.add('#')
 
     return result_first
-
