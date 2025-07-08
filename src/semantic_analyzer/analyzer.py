@@ -18,8 +18,8 @@ def infer_expression_type(expr, symbol_table):
             
             if expr.operator == '%':
                 return 'inteiro'
-            
-            if left_type == 'inteiro' and right_type == 'inteiro':
+
+            if left_type.lower() == 'inteiro' and right_type.lower() == 'inteiro':
                 return 'inteiro'
             
             if ('real' in [left_type, right_type]):
@@ -80,7 +80,7 @@ def analyze_command_call(cmd, symbol_table):
 def analyze_repeat_loop(cmd, symbol_table):
     count_type = infer_expression_type(cmd.count, symbol_table)
 
-    if count_type != 'inteiro':
+    if count_type.lower() != 'inteiro':
         raise Exception("Erro: O 'repita' deve receber uma expressão do tipo inteiro.")
     
     for inner_cmd in cmd.body:
@@ -110,7 +110,7 @@ def analyze_command(cmd, symbol_table):
     
 def analyze_if_statement(cmd, symbol_table):
     cond_type = infer_expression_type(cmd.condition, symbol_table)
-    if cond_type != 'logico':
+    if cond_type.lower() != 'logico':
         raise Exception("Erro: A condição do 'se' deve ser do tipo lógico.")
     
     for inner_cmd in cmd.true_branch:
@@ -122,7 +122,7 @@ def analyze_if_statement(cmd, symbol_table):
 
 def analyze_while_loop(cmd, symbol_table):
     cond_type = infer_expression_type(cmd.condition, symbol_table)
-    if cond_type != 'logico':
+    if cond_type.lower() != 'logico':
         raise Exception("Erro: A condição do 'enquanto' deve ser do tipo lógico.")
     
     for inner_cmd in cmd.body:
