@@ -19,6 +19,5 @@ def main(args):
     tokenizer_obj = Tokenizer(lexer, token_list_table, symbol_table, token_type_factory)
     tokenizer_obj.analise_line(path)
 
-
 if __name__ == "__main__":
     main(sys.argv[1:])
