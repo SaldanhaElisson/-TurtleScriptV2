@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 from errors.error_messages import ErrorMessages
 from errors.error import LexicalError
+=======
+from src.errors.error_messages import ErrorMessages
+from src.errors.error import LexicalError
+>>>>>>> feat-lexical
 from .token_class import KeyWords
 from .token_factory import TokenTypeFactory
 

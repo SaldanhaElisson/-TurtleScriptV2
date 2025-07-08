@@ -141,6 +141,7 @@ instance/
 local_settings.py
 db.sqlite3
 media/
+<<<<<<< HEAD
 =======
 # PyBuilder
 .pybuilder/
@@ -265,4 +266,6 @@ cython_debug/
 .cursorindexingignore
 
 .idea
+>>>>>>> feat-lexical
+=======
 >>>>>>> feat-lexical
