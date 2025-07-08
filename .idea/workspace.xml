@@ -5,14 +5,57 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d72477f0-37db-41d9-b150-784f5412d6f0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/TurtleScriptV2.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/parser/parse_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/Compiladores.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyCharmMiscProject.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/errors/Errors.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/errors/error_messages.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/errors/error_types.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pytest.ini" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/tokenizer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/errors/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/errors/error.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/errors/error_messages.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/errors/error_types.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lexical_analyzer/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lexical_analyzer/tokenizer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lexical_analyzer/utils/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lexical_analyzer/utils/lexer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lexical_analyzer/utils/symbol_table.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lexical_analyzer/utils/token_class.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lexical_analyzer/utils/token_factory.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lexical_analyzer/utils/token_list.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/structs/gramatics.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/structs/lexer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/structs/symbol_table.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/structs/token_factory.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/structs/token_list.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/inputs/char_invalido.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/inputs/closed_delimiter.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/inputs/entrada1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/inputs/entrada2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/inputs/entrada3.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/inputs/exemplo.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/inputs/exemplo2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/inputs/exemplo3.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/inputs/first_char_is_number_on_id.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/inputs/literal_not_closed.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/inputs/opened_delimiter.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_code_generator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_parser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_semantic_analyzer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_tokenizer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_turtle_scripts.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/trabalho.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parser/calculate_first_set.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser/calculate_first_set.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parser/calculate_follow_set.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser/calculate_follow_set.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parser/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser/parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/parser/calculate_first_set_for_sequence_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/parser/calculate_first_set_for_sequence_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/parser/calculate_follow_set_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/parser/calculate_follow_set_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +107,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "feat/ll1-define-grammer",
+    "git-widget-placeholder": "Merging feat/ll1-define-grammer",
     "last_opened_file_path": "/home/elisson/faculdade/TurtleScriptV2",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -155,6 +198,13 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python tests.Python tests for parse_test.TestLL1ParseTable" />
+      <item itemvalue="Python tests.Python tests for parse_test.TestLL1Parser" />
+      <item itemvalue="Python tests.Python tests for parse_test.TestLL1Parser.test_invalid_unexpected_symbol_on_stack" />
+      <item itemvalue="Python tests.Python tests for parse_test.TestParseTreeGeneration" />
+      <item itemvalue="Python tests.Python tests for parse_test.TestParseTreeGeneration.test_valid_simple_expression_tree" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python tests.Python tests for parse_test.TestLL1Parser" />
@@ -201,6 +251,7 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/TurtleScriptV2$.coverage" NAME=" Coverage Results" MODIFIED="1751940301090" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/parser" />
+    <SUITE FILE_PATH="coverage/TurtleScriptV2$.coverage" NAME=" Coverage Results" MODIFIED="1751989447404" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/TurtleScriptV2$main.coverage" NAME="main Coverage Results" MODIFIED="1751989153552" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>
