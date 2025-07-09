@@ -1,12 +1,7 @@
 import re
 
-<<<<<<< HEAD
-from errors.error import LexicalError
-from errors.error_messages import ErrorMessages
-=======
 from src.errors.error import LexicalError
 from src.errors.error_messages import ErrorMessages
->>>>>>> feat-lexical
 from .token_class import Comment, KeyWords, Delimiters, Operators
 
 
@@ -32,12 +27,9 @@ class Lexer:
 
     @staticmethod
     def verify_error_id_not_match(self, lexeme: str, line: int, column: int) -> None:
-<<<<<<< HEAD
-=======
         if re.match(r"[^a-zA-Z0-9_\s\"'()\[\]{}\.,;:+\-*/%=<>!&|^~?]", lexeme):
             raise LexicalError(ErrorMessages.UNKNOWN_SYMBOL.value, line, column, lexeme)
 
->>>>>>> feat-lexical
         if re.match(r"^[^a-zA-Z_]", lexeme):
             raise LexicalError(ErrorMessages.FIRST_SYMBOL.value, line, column, lexeme)
 

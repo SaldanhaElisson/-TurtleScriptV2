@@ -1,42 +1,59 @@
-import sys
-from pprint import pprint
-
-<<<<<<< HEAD
-from lexical_analyzer.tokenizer import Tokenizer
-from lexical_analyzer.utils.lexer import Lexer
-from lexical_analyzer.utils.symbol_table import SymbolTable
-from lexical_analyzer.utils.token_factory import TokenTypeFactory
-from lexical_analyzer.utils.token_list import TokenListTable
-=======
+from src.code_generator.generator import CodeGenerator
 from src.lexical_analyzer.tokenizer import Tokenizer
-from src.lexical_analyzer.utils.lexer import Lexer
-from src.lexical_analyzer.utils.symbol_table import SymbolTable
-from src.lexical_analyzer.utils.token_factory import TokenTypeFactory
-from src.lexical_analyzer.utils.token_list import TokenListTable
->>>>>>> feat-lexical
+from src.lexical_analyzer.utils import TokenTypeFactory, TokenListTable, SymbolTable, Lexer
+from src.parser.ast_nodes import ParserLL1, pretty_print_ast_util
+from src.semantic_analyzer.analyzer import analyze_program
 
 
-def main(args):
-    if not args:
-        raise ValueError("no input file")
-    path = args[0]
-    symbol_table = SymbolTable()
-    token_type_factory = TokenTypeFactory(symbol_table)
-    token_list_table = TokenListTable(token_type_factory)
-    lexer = Lexer()
-    tokenizer_obj = Tokenizer(lexer, token_list_table, symbol_table, token_type_factory)
-    tokenizer_obj.analise_line(path)
+class TurtleScriptCompiler:
+    def __init__(self):
+        self.symbol_table_instance = SymbolTable()
+        self.lexer_instance = Lexer()
+        self.token_factory_instance = TokenTypeFactory(self.symbol_table_instance)
+        self.token_list_instance = TokenListTable(self.token_factory_instance)
+        self.generator = CodeGenerator()
 
-<<<<<<< HEAD
-    print("List<TokenList>: \n")
-    pprint(token_list_table.get_tokens())
-    print("\n")
-    print("List<SymbolsTable>: \n")
-    pprint(symbol_table.get_symbols())
-    print("\n")
+        self.tokenizer = Tokenizer(
+            lexer=self.lexer_instance,
+            token_list=self.token_list_instance,
+            symbol_table=self.symbol_table_instance,
+            token_factory=self.token_factory_instance,
+        )
 
-=======
->>>>>>> feat-lexical
+    def compile_script(self, path):
+        self.tokenizer.analise_line(path)
+        print(self.token_list_instance.get_tokens())
+        parser = ParserLL1(self.token_list_instance.get_tokens())
+        try:
+            ast = parser.parse()
+            print("Árvore Sintática Abstrata (AST) gerada com sucesso:")
+            print(ast)
+
+            print("\n--- Estrutura da AST (Pretty Print) ---")
+            pretty_print_ast_util(ast)
+
+            analyze_program(ast)
+
+            result = self.generator.generate(ast)
+
+            return result
+        except SyntaxError as e:
+            print(f"✗ Erro de sintaxe: {e}")
+        except Exception as e:
+            print(f"✗ Erro inesperado: {e}")
+
+
+def main():
+    compiler = TurtleScriptCompiler()
+
+    generated_python_code = compiler.compile_script("../examples/example.txt")
+
+    if generated_python_code:
+        print("\n--- CÓDIGO PYTHON GERADO ---\n")
+        print(generated_python_code)
+    else:
+        print("\nNenhum código Python gerado devido a erros.")
+
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    main()

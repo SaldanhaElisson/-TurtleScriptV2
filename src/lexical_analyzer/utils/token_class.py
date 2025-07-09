@@ -118,5 +118,3 @@ class Comment(Enum):
       if item.code == code:
         return item.name
     return None
-
-  

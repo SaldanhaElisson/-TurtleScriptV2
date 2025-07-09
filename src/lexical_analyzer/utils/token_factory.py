@@ -13,9 +13,9 @@ class TokenTypeFactory:
             return Delimiters.get_by_code(code)
         elif 22 <= code <= 33:
             return Operators.get_by_code(code)
-        elif code == Comment.COMMENT.value[0]:
+        elif code == 34:
             return Comment.get_by_code(code)
-        elif code > Comment.COMMENT.value[0]:
-            return self.symbol_table.get_by_code(code)
+        elif code >= 35:
+            return self.symbol_table.get_by_code_with_value(code)
         else:
             return None

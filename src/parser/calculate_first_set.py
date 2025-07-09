@@ -1,90 +1,53 @@
-def calculate_first_set_for_sequence(symbol_sequence, grammar_rules, terminal_symbols, first_sets_cache):
-    """
-    Recursively calculates the FIRST set for a given sequence of symbols.
+from typing import List, Set, Dict
 
-    Args:
-        symbol_sequence (list): A list of symbols (terminals and/or non-terminals).
-        grammar_rules (dict): The grammar rules dictionary mapping non-terminals to productions.
-        terminal_symbols (set): A set of all terminal symbols in the grammar.
-        first_sets_cache (dict): A dictionary that stores pre-calculated FIRST sets for individual
-                                 non-terminals and terminals. This is crucial for recursion
-                                 and efficiency.
 
-    Returns:
-        set: The calculated FIRST set for the symbol_sequence.
-    """
-    first_result_set = set()
+def calculate_first_set_for_sequence(sequence: List[str], grammar_rules: Dict,
+                                     terminal_symbols: Set[str], first_sets: Dict) -> Set[str]:
+    if not sequence:
+        return {'#'}  # Epsilon
 
-    if not symbol_sequence:
-        first_result_set.add('#')
-        return first_result_set
+    result = set()
 
-    current_symbol = symbol_sequence[0]
-
-    if current_symbol in terminal_symbols:
-        first_result_set.add(current_symbol)
-        return first_result_set
-    elif current_symbol == '#':
-        first_result_set.add('#')
-        return first_result_set
-
-    if current_symbol in grammar_rules:
-
-        first_of_current_symbol = first_sets_cache.get(current_symbol, set())
-
-        first_result_set.update(s for s in first_of_current_symbol if s != '#')
-
-        if '#' in first_of_current_symbol and len(symbol_sequence) > 1:
-            rest_of_sequence_first = calculate_first_set_for_sequence(
-                symbol_sequence[1:], grammar_rules, terminal_symbols, first_sets_cache
-            )
-            first_result_set.update(rest_of_sequence_first)
-
-        elif '#' in first_of_current_symbol and len(symbol_sequence) == 1:
-            first_result_set.add('#')
+    for symbol in sequence:
+        if symbol in terminal_symbols:
+            result.add(symbol)
+            break
+        else:
+            symbol_first = first_sets.get(symbol, set())
+            result.update(symbol_first - {'#'})
+            if '#' not in symbol_first:
+                break
     else:
-        first_result_set.add(current_symbol)
+        result.add('#')
 
-    return first_result_set
+    return result
 
-def compute_all_first_sets_for_grammar(grammar_rules, non_terminals, terminal_symbols):
-    """
-    Calculates the FIRST set for all non-terminals in the grammar.
+def calculate_first_sets(grammar_rules: Dict, terminal_symbols: Set[str]) -> Dict:
+    """Calcula os conjuntos FIRST para todos os símbolos."""
+    first_sets = {}
 
-    Args:
-        grammar_rules (dict): A dictionary representing the grammar rules
-                              (NonTerminal: [list of productions, where each production is a list of symbols]).
-                              Example: {'E': [['T', '+', 'E'], ['T']], 'T': [['F', '*', 'T'], ['F']]}
-        non_terminals (set): A set of all non-terminal symbols in the grammar.
-        terminal_symbols (set): A set of all terminal symbols in the grammar.
-
-    Returns:
-        dict: A dictionary where keys are non-terminals and values are their calculated FIRST sets.
-    """
-
-    first_sets_cache = {}
     for terminal in terminal_symbols:
-        first_sets_cache[terminal] = {terminal}
+        first_sets[terminal] = {terminal}
 
-    first_sets_cache['#'] = {'#'}
-
-    for non_terminal in non_terminals:
-        first_sets_cache[non_terminal] = set()
-
+    for non_terminal in grammar_rules:
+        first_sets[non_terminal] = set()
 
     changed = True
     while changed:
         changed = False
-        for non_terminal in non_terminals:
-            current_first_set = first_sets_cache[non_terminal].copy()
+        for lhs, productions in grammar_rules.items():
+            for production in productions:
+                if not production or production == ['#']:
+                    if '#' not in first_sets[lhs]:
+                        first_sets[lhs].add('#')
+                        changed = True
+                else:
+                    old_size = len(first_sets[lhs])
+                    prod_first = calculate_first_set_for_sequence(production, grammar_rules, terminal_symbols,
+                                                                  first_sets)
+                    first_sets[lhs].update(prod_first)
+                    if len(first_sets[lhs]) > old_size:
+                        changed = True
 
-            for production in grammar_rules.get(non_terminal, []):
-                first_of_production = calculate_first_set_for_sequence(
-                    production, grammar_rules, terminal_symbols, first_sets_cache
-                )
-                first_sets_cache[non_terminal].update(first_of_production)
+    return first_sets
 
-            if current_first_set != first_sets_cache[non_terminal]:
-                changed = True
-
-    return first_sets_cache
