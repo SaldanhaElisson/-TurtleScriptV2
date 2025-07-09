@@ -138,6 +138,7 @@ class ParserLL1:
             false_branch = self.parse_command_block([KeyWords.END_IF.name])
 
         self.expect(KeyWords.END_IF.name)
+        self.expect(Delimiters.SEMICOLON.name)
         return IfStatement(condition, true_branch, false_branch)
 
     def parse_while_loop(self) -> WhileLoop:
@@ -149,17 +150,19 @@ class ParserLL1:
         body = self.parse_command_block([KeyWords.END_WHILE.name])
 
         self.expect(KeyWords.END_WHILE.name)
+        self.expect(Delimiters.SEMICOLON.name)
         return WhileLoop(condition, body)
 
     def parse_repeat_loop(self) -> RepeatLoop:
 
         self.expect(KeyWords.REPEAT.name)
         count = self.parse_expression()
-        self.expect(KeyWords.DO.name)
+        self.expect(KeyWords.TIMES.name)
 
         body = self.parse_command_block([KeyWords.END_REPEAT.name])
 
         self.expect(KeyWords.END_REPEAT.name)
+        self.expect(Delimiters.SEMICOLON.name)
         return RepeatLoop(count, body)
 
     def parse_command_block(self, stop_tokens: list[str]) -> list:

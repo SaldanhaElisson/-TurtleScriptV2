@@ -13,6 +13,9 @@ class KeyWords(Enum):
   WHILE = (10, "enquanto")
   DO = (11, "faca")
   END_WHILE = (12, "fim_enquanto")
+  REPEAT = (13, "repita")
+  END_REPEAT = (14, "fim_repita")
+  TIMES = (15, "vezes")
 
   def __init__(self, code: int, lexeme: str):
     self._code = code
@@ -34,15 +37,15 @@ class KeyWords(Enum):
     return None
 
 class Delimiters(Enum):
-  START = (13, "inicio")
-  END = (14, "fim")
-  COLON = (15, ":")
-  SEMICOLON = (16, ";")
-  QUOTATION_MARK = (17, '"')
-  COMMA = (18, ',')
-  LEFT_PAR = (19, '(')
-  RIGHT_PAR = (20, ')')
-  SINGLE_QUOTE = (21, '\'')
+  START = (16, "inicio")
+  END = (17, "fim")
+  COLON = (18, ":")
+  SEMICOLON = (19, ";")
+  QUOTATION_MARK = (20, '"')
+  COMMA = (21, ',')
+  LEFT_PAR = (22, '(')
+  RIGHT_PAR = (23, ')')
+  SINGLE_QUOTE = (24, '\'')
   def __init__(self, code: int, lexeme: str):
     self._code = code
     self._lexeme = lexeme
@@ -64,18 +67,18 @@ class Delimiters(Enum):
 
 
 class Operators(Enum):
-  EQUAL = (22, "==")
-  NOT_EQUAL = (23, "!=")
-  LESS_THAN = (24, "<")
-  LESS_EQUAL = (25, "<=")
-  GREATER_THAN = (26, ">")
-  GREATER_EQUAL = (27, ">=")
-  PLUS = (28, "+")
-  MINUS = (29, "-")
-  MULTIPLICATION = (30, "*")
-  DIVISIVE = (31, "/")
-  ASSIGN = (32, "=")
-  PERCENTAGE = (33, "%")
+  EQUAL = (25, "==")
+  NOT_EQUAL = (26, "!=")
+  LESS_THAN = (27, "<")
+  LESS_EQUAL = (28, "<=")
+  GREATER_THAN = (29, ">")
+  GREATER_EQUAL = (30, ">=")
+  PLUS = (31, "+")
+  MINUS = (32, "-")
+  MULTIPLICATION = (33, "*")
+  DIVISIVE = (34, "/")
+  ASSIGN = (35, "=")
+  PERCENTAGE = (36, "%")
 
   def __init__(self, code: int, lexeme: str):
     self._code = code
@@ -98,7 +101,7 @@ class Operators(Enum):
 
 
 class Comment(Enum):
-  COMMENT = (34, "//")
+  COMMENT = (37, "//")
 
   def __init__(self, code: int, lexeme: str):
     self._code = code

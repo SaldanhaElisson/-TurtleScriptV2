@@ -1,10 +1,10 @@
 import sys
 
-from src.code_generator.generator import CodeGenerator
+from src.code_generator.gerador import CodeGenerator
 from src.lexical_analyzer.tokenizer import Tokenizer
 from src.lexical_analyzer.utils import TokenTypeFactory, TokenListTable, SymbolTable, Lexer
-from src.parser.ast_nodes import ParserLL1, pretty_print_ast_util
-from src.semantic_analyzer.analyzer import analyze_program
+from src.parser.parser import ParserLL1, pretty_print_ast_util
+from src.semantic_analyzer.semantico import analyze_program
 
 
 class TurtleScriptCompiler:
@@ -24,6 +24,7 @@ class TurtleScriptCompiler:
 
     def compile_script(self, path):
         self.tokenizer.analise_line(path)
+        print("\n\nToken List:")
         print(self.token_list_instance.get_tokens())
         parser = ParserLL1(self.token_list_instance.get_tokens())
         try:
@@ -58,7 +59,7 @@ def main(args):
         print("\n--- CÓDIGO PYTHON GERADO ---\n")
         print(generated_python_code)
     else:
-        print("\nNenhum código Python gerado devido a erros.")
+        raise Exception("\nNenhum código Python gerado devido a erros.")
 
 
 if __name__ == "__main__":

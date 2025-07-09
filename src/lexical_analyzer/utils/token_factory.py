@@ -7,15 +7,15 @@ class TokenTypeFactory:
         self.symbol_table = symbol_table
 
     def factory(self, code: int) -> str | None:
-        if 1 <= code <= 12:
+        if 1 <= code <= 15:
             return KeyWords.get_by_code(code)
-        elif 13 <= code <= 21:
+        elif 16 <= code <= 24:
             return Delimiters.get_by_code(code)
-        elif 22 <= code <= 33:
+        elif 25 <= code <= 36:
             return Operators.get_by_code(code)
-        elif code == 34:
+        elif code == 37:
             return Comment.get_by_code(code)
-        elif code >= 35:
+        elif code >= 36:
             return self.symbol_table.get_by_code_with_value(code)
         else:
             return None

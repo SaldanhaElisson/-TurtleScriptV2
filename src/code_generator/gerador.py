@@ -24,7 +24,7 @@ class CodeGenerator:
         self.indent_level -= 1
 
     def generate_output_file(self, code):
-        file = open(f"examples/output_{self.file_count}.py", "w")
+        file = open(f"examples/saida{self.file_count}.py", "w")
 
         file.write(code)
         file.close()
@@ -71,8 +71,8 @@ class CodeGenerator:
     def generate_expression(self, expr):
         if isinstance(expr, Literal):
             if expr.type_ == "texto":
-                return f'"{expr.value}"'
-            return str(expr.value)
+                return f'"{expr.value.strip()}"'
+            return str(expr.value).strip()
 
         elif isinstance(expr, VariableReference):
             return expr.name

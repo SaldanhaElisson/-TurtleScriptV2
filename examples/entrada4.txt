@@ -1,0 +1,29 @@
+inicio
+    var inteiro: lado;
+    var texto: cor;
+
+    lado = 0;
+    cor_de_fundo "black";
+    definir_espessura 2;
+
+    enquanto lado < 100 faca
+        se lado > 50 entao
+            definir_cor "cyan";
+            avancar lado;
+            girar_direita 90;
+        senao
+            definir_cor "red";
+            avancar 90;
+            girar_direita 90;
+        fim_se;
+
+        definir_cor "cyan";
+        avancar lado;
+        girar_direita 90;
+
+        lado = lado + 5;
+    fim_enquanto;
+
+    lado = 5;
+    definir_cor "white";
+fim
