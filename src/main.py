@@ -18,6 +18,8 @@ def main(args):
     lexer = Lexer()
     tokenizer_obj = Tokenizer(lexer, token_list_table, symbol_table, token_type_factory)
     tokenizer_obj.analise_line(path)
-
+    t = token_list_table.get_tokens()
+    for token in t:
+        pprint(f"Token(type='{token.token_type}', lexeme='{token.lexeme}', line={token.line}, column={token.column})")
 if __name__ == "__main__":
     main(sys.argv[1:])

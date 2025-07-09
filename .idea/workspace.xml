@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d72477f0-37db-41d9-b150-784f5412d6f0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lexical_analyzer/utils/symbol_table.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexical_analyzer/utils/symbol_table.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lexical_analyzer/utils/token.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexical_analyzer/utils/token.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comand_line.sh" beforeDir="false" afterPath="$PROJECT_DIR$/comand_line.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lexical_analyzer/utils/token_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexical_analyzer/utils/token_class.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lexical_analyzer/utils/token_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexical_analyzer/utils/token_factory.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
@@ -89,7 +89,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/main.py" />
-      <option name="PARAMETERS" value="examples/program5.trs" />
+      <option name="PARAMETERS" value="tests/inputs/entrada3.txt" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -216,9 +216,14 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/lexical_analyzer/utils/symbol_table.py</url>
-          <line>9</line>
-          <option name="timeStamp" value="20" />
+          <url>file://$PROJECT_DIR$/src/lexical_analyzer/utils/lexer.py</url>
+          <line>44</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/lexical_analyzer/utils/lexer.py</url>
+          <line>38</line>
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
