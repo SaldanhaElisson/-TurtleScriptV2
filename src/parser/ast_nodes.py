@@ -5,8 +5,6 @@ from src.lexical_analyzer.utils.token import Token
 from src.semantic_analyzer.syntatic_tree import VariableDeclaration, Assignment, Command, RepeatLoop, WhileLoop, \
     IfStatement, VariableReference, Literal, BinaryExpression, CommentNode, Program
 
-
-
 class ParserLL1:
     def __init__(self, tokens: list[Token]):
         self.tokens = tokens

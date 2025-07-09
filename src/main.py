@@ -1,3 +1,5 @@
+import sys
+
 from src.code_generator.generator import CodeGenerator
 from src.lexical_analyzer.tokenizer import Tokenizer
 from src.lexical_analyzer.utils import TokenTypeFactory, TokenListTable, SymbolTable, Lexer
@@ -43,10 +45,14 @@ class TurtleScriptCompiler:
             print(f"✗ Erro inesperado: {e}")
 
 
-def main():
+def main(args):
+    if not args:
+        raise ValueError("no input file")
+    path = args[0]
+
     compiler = TurtleScriptCompiler()
 
-    generated_python_code = compiler.compile_script("../examples/example.txt")
+    generated_python_code = compiler.compile_script(path)
 
     if generated_python_code:
         print("\n--- CÓDIGO PYTHON GERADO ---\n")
@@ -56,4 +62,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:])
