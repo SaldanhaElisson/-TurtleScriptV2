@@ -1,20 +1,25 @@
 inicio
-    var inteiro: lado;
-    var texto: cor;
+  // --- Declaracao de Variaveis ---
+  // A declaracao de todas as variaveis ocorre no inicio do escopo .
+  var inteiro : passo , repeticoes ;
+  var texto : cor_fundo , cor_linha , titulo ;
+  var real : angulo_preciso ;
+  var logico : desenhar_forma ;
 
-    lado = 5;
-    cor_fundo "black";
-    definir_espessura 2;
+  // --- Atribuicoes de Valores ---
+  // Atribuicao a variaveis do tipo ’inteiro ’.
+  passo = 150;
+  repeticoes = 5;
 
+  // Atribuicao a variaveis do tipo ’texto ’ com string .
+  titulo = " Desenho de uma Estrela ";
+  cor_fundo = " black ";
+  cor_linha = " blue ";
 
-    repita 50 vezes
-        // Muda a cor da linha a cada iteracao
-        definir_cor "cyan"
+  // Atribuicao a uma variavel do tipo ’real ’ para maior precisao .
+  angulo_preciso = 144.0;
 
-        // Desenha e aumenta o lado
-        avancar lado;
-        girar_direita 90;
+  // Atribuicao a uma variavel do tipo ’logico ’.
+  desenhar_forma = verdadeiro ;
 
-        lado = lado + 5;
-    fim_repita;
 fim

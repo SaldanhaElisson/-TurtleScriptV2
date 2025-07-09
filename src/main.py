@@ -23,15 +23,10 @@ def main(args):
     tokenizer_obj = Tokenizer(lexer, token_list_table, symbol_table, token_type_factory)
     tokenizer_obj.analise_line(path)
 
-
     generator = CodeGenerator()
 
     inputs = [
-        AST_Input_1,
-        AST_Input_2,
-        AST_Input_3,
-        AST_Input_4,
-        Error_input
+        AST_Input_1, AST_Input_2, AST_Input_3, AST_Input_4, Error_input
     ]
 
     try:

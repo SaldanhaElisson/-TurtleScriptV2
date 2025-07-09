@@ -2,7 +2,7 @@ import re
 
 from src.errors.error import LexicalError
 from src.errors.error_messages import ErrorMessages
-from .utils.token_class import Operators, Delimiters, Comment
+from .utils.token_class import Operators, Delimiters, Comment, KeyWords
 from .utils.lexer import Lexer
 from .utils.symbol_table import SymbolTable
 from .utils.token_factory import TokenTypeFactory
@@ -83,14 +83,56 @@ class Tokenizer:
                 try:
                     token_code = self._lexer.analyze(lexeme, line_number, column)
                     if token_code is None:
-                        symbol = self._symbol_table.get_by_lexeme(lexeme)
+                        symbol = self._symbol_table.get_by_code_lexeme(lexeme)
                         if symbol is None:
-                            token_code = self._symbol_table.add_symbol(lexeme)
+                            token_code = self._symbol_table.add_symbol(lexeme, self.filter_id_type())
                         else:
                             token_code = symbol
                     self._token_list.add_token(token_code, lexeme, line_number, column)
                 except LexicalError as e:
                     raise e
+
+    def filter_id_type(self) -> str | None:
+        tokens = self._token_list.get_tokens()
+        if not tokens:
+            return None
+
+        valid_types = {
+            KeyWords.INTEGER.value[1]: KeyWords.INTEGER,
+            KeyWords.TEXT.value[1]: KeyWords.TEXT,
+            KeyWords.BOOLEAN.value[1]: KeyWords.BOOLEAN,
+            KeyWords.FLOAT.value[1]: KeyWords.FLOAT,
+        }
+
+        last_index = len(tokens) - 1
+        last_token = tokens[last_index]
+
+        if last_token.lexeme == ",":
+            i = last_index
+            while i >= 0 and tokens[i].lexeme != ":":
+                i -= 1
+
+            if i < 0 or i + 1 >= len(tokens):
+                return None
+
+            next_token = tokens[i + 1]
+            if isinstance(next_token.lexeme, str) and next_token.lexeme in valid_types:
+                return valid_types[next_token.lexeme].value[1]
+            else:
+                return None
+
+        elif last_token.lexeme == ":":
+            i = last_index
+            if i - 1 < 0:
+                return None
+
+            previous_token = tokens[i - 1]
+            if isinstance(previous_token.lexeme, str) and previous_token.lexeme in valid_types:
+                return valid_types[previous_token.lexeme].value[1]
+            else:
+                return None
+
+        return None
 
     def filter_list(
         self, lexemes: list[tuple[str, int, int]]

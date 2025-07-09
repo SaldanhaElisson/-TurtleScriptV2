@@ -1,12 +1,12 @@
 from src.semantic_analyzer.syntatic_tree import BinaryExpression, Literal, VariableReference, Assignment, Command, RepeatLoop, Comment, IfStatement, WhileLoop
-from src.semantic_analyzer.symbol_table import SymbolTable
+from src.lexical_analyzer.utils.symbol_table import SymbolTable
 
 def infer_expression_type(expr, symbol_table):
     if isinstance(expr, Literal):
         return expr.type_
     
     elif isinstance(expr, VariableReference):
-        return symbol_table.lookup(expr.name)
+        return symbol_table.get_by_lexeme(expr.name)
     
     elif isinstance(expr, BinaryExpression):
         left_type = infer_expression_type(expr.left, symbol_table)
@@ -53,7 +53,7 @@ command_signature = {
 }
 
 def analyze_assignment(cmd, symbol_table):
-    var_type = symbol_table.lookup(cmd.var_name)
+    var_type = symbol_table.get_by_lexeme(cmd.var_name)
     expr_type = infer_expression_type(cmd.expression, symbol_table)
 
     if var_type != expr_type:
@@ -133,7 +133,7 @@ def analyze_program(program):
 
     for decl in program.declarations:
         for name in decl.names:
-            symbol_table.declare(name, decl.var_type)
+            symbol_table.add_symbol(name, decl.var_type)
 
     for cmd in program.commands:
         analyze_command(cmd, symbol_table)
